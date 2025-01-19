@@ -9,6 +9,7 @@ var cur_level_path : String
 var loading := false
 
 func _ready() -> void:
+	Global.loaded_save = SaveResource.new(1)
 	SignalManager.load_level.connect(load_level)
 	Console.add_command("loadlevel", load_level, ["level_name"], 1, "Load a level based on scene name")
 	load_level("main_menu")

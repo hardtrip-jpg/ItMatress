@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Console="*res://addons/console/console.gd"
-SignalManager="*res://globals/signal_manager.gd"
+SignalManager="*res://globals/scripts/signal_manager.gd"
+Global="*res://globals/scripts/global.gd"
 
 [debug]
 
@@ -39,6 +40,7 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg")
 folder_colors={
 "res://addons/": "gray",
 "res://globals/": "green",
+"res://levels/": "red",
 "res://players/": "purple",
 "res://ui/": "blue"
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://8ihndydi4asp"]
 
-[ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/main_screen.gd" id="1_gocdf"]
-[ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/load_screen.gd" id="2_5jtb1"]
+[ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/scripts/main_screen.gd" id="1_gocdf"]
+[ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
 
 [node name="MainScreen" type="Control" node_paths=PackedStringArray("loading_screen", "level_holder")]
 layout_mode = 3

@@ -1,8 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6ugu4slromtn"]
+[gd_scene load_steps=11 format=3 uid="uid://b6ugu4slromtn"]
 
 [ext_resource type="PackedScene" uid="uid://djxf7brblh231" path="res://ui/assets/mattress__furniture_model/scene.gltf" id="1_0ettg"]
 [ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/main_menu.gd" id="1_6ymyu"]
 [ext_resource type="Texture2D" uid="uid://buh2v0yq2j3px" path="res://ui/assets/1648290.png" id="1_duh7t"]
+[ext_resource type="Script" uid="uid://djegbvwlvyax8" path="res://ui/scripts/level_select_button.gd" id="4_7rktv"]
+
+[sub_resource type="Animation" id="Animation_duh7t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_0ettg"]
 resource_name = "rotate"
@@ -20,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0), Vector3(0, 3.14159, 0), Vector3(0, 4.71239, 0), Vector3(0, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_duh7t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ymyu"]
@@ -55,7 +56,7 @@ background_mode = 2
 sky = SubResource("Sky_duh7t")
 tonemap_mode = 2
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button", "quit_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button", "quit_button", "level_select", "main_screen")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,8 +64,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6ymyu")
-play_button = NodePath("PlayButton")
-quit_button = NodePath("QuitButton")
+play_button = NodePath("MainScreen/PlayButton")
+quit_button = NodePath("MainScreen/QuitButton")
+level_select = NodePath("LevelSelect")
+main_screen = NodePath("MainScreen")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -114,33 +117,126 @@ transform = Transform3D(0.621435, -0.605913, 0.496677, 0.00510038, 0.637063, 0.7
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_6ymyu")
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="MainScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayButton" type="Button" parent="MainScreen"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.5
-offset_top = -96.0
-offset_right = 20.5
-offset_bottom = -65.0
+offset_left = 119.5
+offset_top = 104.0
+offset_right = 160.5
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Play"
 
-[node name="QuitButton" type="Button" parent="."]
+[node name="QuitButton" type="Button" parent="MainScreen"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -56.0
-offset_right = 22.0
-offset_bottom = -25.0
+offset_left = 120.0
+offset_top = 144.0
+offset_right = 162.0
+offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Quit
 "
+
+[node name="Label" type="Label" parent="MainScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 92.0
+offset_top = 60.0
+offset_right = 188.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "it MATTRESS"
+
+[node name="LevelSelect" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelSelect/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSelect/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Level Select"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "level 1"
+script = ExtResource("4_7rktv")
+level_name = "prototype_level"
+level_id = 1
+
+[node name="Button2" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "level 2"
+script = ExtResource("4_7rktv")
+level_id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button3" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "level 3"
+script = ExtResource("4_7rktv")
+level_id = 3
+
+[node name="Button4" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "level 4"
+script = ExtResource("4_7rktv")
+level_id = 4
+
+[node name="Button5" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "level 5"
+script = ExtResource("4_7rktv")
+level_id = 5
