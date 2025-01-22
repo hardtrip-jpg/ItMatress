@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 			change_scene(ResourceLoader.load_threaded_get(cur_level_path))
 		elif status == ResourceLoader.THREAD_LOAD_FAILED:
 			Console.print_error("%s failed to load" % cur_level_path, true)
+			loading = false
 
 func unload_level() -> void:
 	if is_instance_valid(level_instance):

@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c62qhu20r8a24"]
+[gd_scene load_steps=12 format=3 uid="uid://c62qhu20r8a24"]
 
 [ext_resource type="Script" uid="uid://di0cvsshwjc64" path="res://players/scripts/player_controller.gd" id="1_4ihkx"]
 [ext_resource type="Texture2D" uid="uid://bhrnr2dq2f472" path="res://players/assets/matress_end.png" id="2_ahlmt"]
 [ext_resource type="Texture2D" uid="uid://dapwhjod7nks" path="res://players/assets/player.png" id="2_v7efa"]
 [ext_resource type="Script" uid="uid://dcxxxtpvsa3mw" path="res://players/scripts/player_sprite.gd" id="3_4raac"]
 [ext_resource type="Texture2D" uid="uid://cy6gsvq6qx70l" path="res://players/assets/matress_middle.png" id="3_wm554"]
+[ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_vvvkt"]
+[ext_resource type="Script" uid="uid://dv7rrrh5t0nvs" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_mkwqq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_71twf"]
 radius = 8.0
@@ -15,10 +17,17 @@ size = Vector2(16, 37)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahlmt"]
 size = Vector2(16, 37)
 
+[sub_resource type="Resource" id="Resource_cilvr"]
+script = ExtResource("7_mkwqq")
+duration = 1.0
+transition = 6
+ease = 2
+
 [node name="PlayerManager" type="Node2D"]
 
 [node name="Player1" type="RigidBody2D" parent="."]
 position = Vector2(0, -48)
+collision_layer = 3
 mass = 8.0
 linear_damp = 1.0
 script = ExtResource("1_4ihkx")
@@ -38,6 +47,7 @@ other_player = NodePath("../../Player2/Sprite2D2")
 
 [node name="Player2" type="RigidBody2D" parent="."]
 position = Vector2(0, 48)
+collision_layer = 3
 mass = 8.0
 linear_damp = 1.0
 script = ExtResource("1_4ihkx")
@@ -56,6 +66,7 @@ other_player = NodePath("../../Player1/Sprite2D")
 
 [node name="MatressTop" type="RigidBody2D" parent="."]
 position = Vector2(0, -20)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MatressTop"]
 position = Vector2(0, 0.5)
@@ -72,16 +83,11 @@ texture = ExtResource("2_ahlmt")
 
 [node name="MatressBottom" type="RigidBody2D" parent="."]
 position = Vector2(0, 14)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MatressBottom"]
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_ahlmt")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="MatressBottom"]
-position = Vector2(0, -14)
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
 
 [node name="Sprite2D" type="Sprite2D" parent="MatressBottom"]
 texture_filter = 3
@@ -118,4 +124,12 @@ angular_limit_enabled = true
 angular_limit_lower = -0.139626
 angular_limit_upper = 0.139626
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_targets")]
+top_level = true
+script = ExtResource("6_vvvkt")
+priority = 1
+follow_mode = 3
+follow_targets = [NodePath("../Player1"), NodePath("../Player2")]
+tween_resource = SubResource("Resource_cilvr")
+follow_damping = true
+metadata/_custom_type_script = ExtResource("6_vvvkt")

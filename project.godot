@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Console="*res://addons/console/console.gd"
 SignalManager="*res://globals/scripts/signal_manager.gd"
 Global="*res://globals/scripts/global.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [debug]
 
@@ -29,17 +30,19 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=320
 window/size/viewport_height=240
+window/size/always_on_top=true
 window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/console/plugin.cfg")
+enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://addons/": "gray",
 "res://globals/": "green",
+"res://level_components/": "orange",
 "res://levels/": "red",
 "res://players/": "purple",
 "res://ui/": "blue"
@@ -95,6 +98,11 @@ folder_colors={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Physics"
+2d_physics/layer_2="Interactions"
 
 [physics]
 

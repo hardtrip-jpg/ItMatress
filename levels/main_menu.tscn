@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b6ugu4slromtn"]
+[gd_scene load_steps=25 format=4 uid="uid://b6ugu4slromtn"]
 
 [ext_resource type="PackedScene" uid="uid://djxf7brblh231" path="res://ui/assets/mattress__furniture_model/scene.gltf" id="1_0ettg"]
 [ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/main_menu.gd" id="1_6ymyu"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://0gwou0mdwke6" path="res://ui/assets/mattress__furniture_model/textures/Mattress_metallicRoughness.png" id="7_lppu5"]
 [ext_resource type="Shader" uid="uid://cqjml54hqjteg" path="res://ui/outline.gdshader" id="8_6xkr4"]
 [ext_resource type="Texture2D" uid="uid://csco4fe481asg" path="res://ui/assets/mattress__furniture_model/textures/Mattress_normal.png" id="9_b8wrl"]
+[ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_6xkr4"]
+[ext_resource type="Script" uid="uid://dv7rrrh5t0nvs" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_b8wrl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6flho"]
 shader = ExtResource("3_nwbki")
@@ -121,6 +123,12 @@ sky_material = SubResource("ProceduralSkyMaterial_0ettg")
 background_mode = 2
 sky = SubResource("Sky_duh7t")
 tonemap_mode = 2
+
+[sub_resource type="Resource" id="Resource_s01ir"]
+script = ExtResource("12_b8wrl")
+duration = 0.0
+transition = 0
+ease = 2
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button", "quit_button", "level_select", "main_screen")]
 layout_mode = 3
@@ -289,6 +297,7 @@ level_id = 1
 layout_mode = 2
 text = "level 2"
 script = ExtResource("4_7rktv")
+level_name = "prototype_level_two"
 level_id = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
@@ -312,5 +321,13 @@ layout_mode = 2
 text = "level 5"
 script = ExtResource("4_7rktv")
 level_id = 5
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(160, 120)
+script = ExtResource("11_6xkr4")
+snap_to_pixel = true
+tween_resource = SubResource("Resource_s01ir")
+tween_on_load = false
+metadata/_custom_type_script = ExtResource("11_6xkr4")
 
 [editable path="SubViewportContainer/SubViewport/Sketchfab_Scene"]

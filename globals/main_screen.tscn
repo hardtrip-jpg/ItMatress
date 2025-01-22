@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=5 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/scripts/main_screen.gd" id="1_gocdf"]
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
+[ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/success_manager.gd" id="2_h6ngx"]
+[ext_resource type="Script" uid="uid://dny8jqm2ac500" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_1lk24"]
 
 [node name="MainScreen" type="Control" node_paths=PackedStringArray("loading_screen", "level_holder")]
 layout_mode = 3
@@ -14,8 +16,54 @@ script = ExtResource("1_gocdf")
 loading_screen = NodePath("LoadScreen")
 level_holder = NodePath("LevelHolder")
 
+[node name="UI" type="Control" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Timer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0:00"
+horizontal_alignment = 1
+
+[node name="Success" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_h6ngx")
+
+[node name="Label" type="Label" parent="UI/Success"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Menu" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +72,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LoadScreen" type="Control" parent="." node_paths=PackedStringArray("progress_bar")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,3 +98,11 @@ offset_right = 312.0
 offset_bottom = 231.0
 
 [node name="LevelHolder" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("4_1lk24")
+metadata/_custom_type_script = ExtResource("4_1lk24")
