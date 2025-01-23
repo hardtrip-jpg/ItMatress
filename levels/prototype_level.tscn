@@ -386,4 +386,5 @@ tile_set = SubResource("TileSet_qkken")
 process_mode = 0
 position = Vector2(204, 156)
 
-[node name="IntroSequence" parent="." instance=ExtResource("3_htrvu")]
+[node name="IntroSequence" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_htrvu")]
+player = NodePath("..")

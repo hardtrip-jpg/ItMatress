@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://blha7xrqpw8yp"]
+[gd_scene load_steps=9 format=3 uid="uid://blha7xrqpw8yp"]
 
 [ext_resource type="Script" uid="uid://ctum48ceyc6cl" path="res://level_components/intro_sequence.gd" id="1_tcwfv"]
 [ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_e0xxc"]
@@ -7,12 +7,40 @@
 [sub_resource type="Animation" id="Animation_tcwfv"]
 resource_name = "intro_cutscene"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhantomCamera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_4ubvv"]
 resource_name = "readysetgo"
 
+[sub_resource type="Animation" id="Animation_e0xxc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhantomCamera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e0xxc"]
 _data = {
+&"RESET": SubResource("Animation_e0xxc"),
 &"intro_cutscene": SubResource("Animation_tcwfv"),
 &"readysetgo": SubResource("Animation_4ubvv")
 }
@@ -23,8 +51,10 @@ duration = 1.0
 transition = 0
 ease = 2
 
-[node name="IntroSequence" type="Node2D"]
+[node name="IntroSequence" type="Node2D" node_paths=PackedStringArray("animation_player", "label")]
 script = ExtResource("1_tcwfv")
+animation_player = NodePath("AnimationPlayer")
+label = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -39,10 +69,3 @@ script = ExtResource("2_e0xxc")
 tween_resource = SubResource("Resource_685ew")
 tween_on_load = false
 metadata/_custom_type_script = ExtResource("2_e0xxc")
-
-[node name="Label" type="Label" parent="PhantomCamera2D"]
-offset_left = -112.0
-offset_top = 88.0
-offset_right = 112.0
-offset_bottom = 111.0
-text = "Press any button to continue"

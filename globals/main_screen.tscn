@@ -1,10 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=10 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/scripts/main_screen.gd" id="1_gocdf"]
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
 [ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/scripts/success_manager.gd" id="2_h6ngx"]
 [ext_resource type="Script" uid="uid://biplvsujsor06" path="res://globals/scripts/level_timer.gd" id="3_t6heb"]
 [ext_resource type="Script" uid="uid://dny8jqm2ac500" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_1lk24"]
+[ext_resource type="Texture2D" uid="uid://c1gjqui1vypsl" path="res://ui/assets/ready.png" id="5_o1vlk"]
+[ext_resource type="Texture2D" uid="uid://li0wdfx2wyje" path="res://ui/assets/set.png" id="6_fsj25"]
+[ext_resource type="Texture2D" uid="uid://tr5l831ebxr4" path="res://ui/assets/go.png" id="7_nb7wt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t1qt3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_o1vlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fsj25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nb7wt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="MainScreen" type="Control" node_paths=PackedStringArray("loading_screen", "level_holder")]
 layout_mode = 3
@@ -111,6 +131,28 @@ grow_vertical = 2
 text = "YOU WIN"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="IntroSequence" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/IntroSequence"]
+texture_filter = 1
+position = Vector2(160, 112)
+scale = Vector2(3.2, 3.2)
+sprite_frames = SubResource("SpriteFrames_t1qt3")
+
+[node name="Label" type="Label" parent="CanvasLayer/IntroSequence"]
+offset_left = 48.0
+offset_top = 200.0
+offset_right = 272.0
+offset_bottom = 223.0
+text = "Press any button to continue"
 
 [node name="LevelHolder" type="Node" parent="."]
 
