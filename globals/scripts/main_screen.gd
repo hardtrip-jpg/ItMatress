@@ -44,6 +44,7 @@ func load_level(level_name : String) -> void:
 		return
 	
 	cur_level_path = level_path
+	Global.current_level = level_name
 	
 	loading_screen.show()
 	if(ResourceLoader.has_cached(level_path)):

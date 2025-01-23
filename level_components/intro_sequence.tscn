@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://blha7xrqpw8yp"]
+
+[ext_resource type="Script" uid="uid://ctum48ceyc6cl" path="res://level_components/intro_sequence.gd" id="1_tcwfv"]
+[ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_e0xxc"]
+[ext_resource type="Script" uid="uid://dv7rrrh5t0nvs" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_l7ct5"]
+
+[sub_resource type="Animation" id="Animation_tcwfv"]
+resource_name = "intro_cutscene"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_4ubvv"]
+resource_name = "readysetgo"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e0xxc"]
+_data = {
+&"intro_cutscene": SubResource("Animation_tcwfv"),
+&"readysetgo": SubResource("Animation_4ubvv")
+}
+
+[sub_resource type="Resource" id="Resource_685ew"]
+script = ExtResource("3_l7ct5")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="IntroSequence" type="Node2D"]
+script = ExtResource("1_tcwfv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e0xxc")
+}
+autoplay = "intro_cutscene"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("2_e0xxc")
+tween_resource = SubResource("Resource_685ew")
+tween_on_load = false
+metadata/_custom_type_script = ExtResource("2_e0xxc")
+
+[node name="Label" type="Label" parent="PhantomCamera2D"]
+offset_left = -112.0
+offset_top = 88.0
+offset_right = 112.0
+offset_bottom = 111.0
+text = "Press any button to continue"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=4 uid="uid://b6ugu4slromtn"]
 
 [ext_resource type="PackedScene" uid="uid://djxf7brblh231" path="res://ui/assets/mattress__furniture_model/scene.gltf" id="1_0ettg"]
-[ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/main_menu.gd" id="1_6ymyu"]
+[ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/scripts/main_menu.gd" id="1_6ymyu"]
 [ext_resource type="Texture2D" uid="uid://dstdvt7a30kxb" path="res://ui/assets/1648290-export.png" id="2_7rktv"]
 [ext_resource type="Shader" uid="uid://cj2uasujyvqy3" path="res://ui/dithering.gdshader" id="3_nwbki"]
 [ext_resource type="Script" uid="uid://djegbvwlvyax8" path="res://ui/scripts/level_select_button.gd" id="4_7rktv"]
@@ -61,7 +61,7 @@ _data = {
 render_priority = 0
 shader = ExtResource("8_6xkr4")
 shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
-shader_parameter/size = 1.01
+shader_parameter/size = 1.02
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3h5g"]
 resource_name = "Mattress"
@@ -77,6 +77,7 @@ normal_enabled = true
 normal_texture = ExtResource("9_b8wrl")
 ao_enabled = true
 ao_texture = ExtResource("7_lppu5")
+texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qwijl"]
 _surfaces = [{
@@ -168,6 +169,7 @@ grow_vertical = 2
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 size = Vector2i(320, 240)
 size_2d_override_stretch = true

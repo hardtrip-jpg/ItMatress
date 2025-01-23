@@ -108,6 +108,7 @@ folder_colors={
 
 2d/physics_engine="Rapier2D"
 2d/default_gravity_vector=Vector2(0, 0)
+common/physics_interpolation=true
 
 [rendering]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://cyyvn77rw0jkq"]
+[gd_scene load_steps=6 format=4 uid="uid://cyyvn77rw0jkq"]
 
 [ext_resource type="Texture2D" uid="uid://cv7uqf3gueep3" path="res://globals/tilemap_packed.png" id="1_ycx7s"]
 [ext_resource type="PackedScene" uid="uid://c62qhu20r8a24" path="res://players/scenes/player_manager.tscn" id="2_htrvu"]
+[ext_resource type="PackedScene" uid="uid://blha7xrqpw8yp" path="res://level_components/intro_sequence.tscn" id="3_htrvu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjhn6"]
 texture = ExtResource("1_ycx7s")
@@ -382,4 +383,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAA
 tile_set = SubResource("TileSet_qkken")
 
 [node name="PlayerManager" parent="." instance=ExtResource("2_htrvu")]
+process_mode = 0
 position = Vector2(204, 156)
+
+[node name="IntroSequence" parent="." instance=ExtResource("3_htrvu")]
