@@ -13,6 +13,7 @@ func _ready() -> void:
 	SignalManager.stop_timer.connect(stop_timer)
 	SignalManager.load_level.connect(load_level)
 	timer.timeout.connect(timer_update)
+	Console.add_command("start_timer", start_timer)
 
 func start_timer() -> void:
 	show()

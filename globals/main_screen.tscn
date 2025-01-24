@@ -37,6 +37,8 @@ script = ExtResource("1_gocdf")
 loading_screen = NodePath("CanvasLayer/LoadScreen")
 level_holder = NodePath("LevelHolder")
 
+[node name="GameStates" type="Node" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="LoadScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("progress_bar")]
@@ -85,7 +87,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Timer" type="Control" parent="CanvasLayer/UI" node_paths=PackedStringArray("timer", "label")]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 320.0
@@ -133,6 +134,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="IntroSequence" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,6 +150,7 @@ scale = Vector2(3.2, 3.2)
 sprite_frames = SubResource("SpriteFrames_t1qt3")
 
 [node name="Label" type="Label" parent="CanvasLayer/IntroSequence"]
+layout_mode = 0
 offset_left = 48.0
 offset_top = 200.0
 offset_right = 272.0

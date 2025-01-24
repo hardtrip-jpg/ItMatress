@@ -24,7 +24,6 @@ transition = 6
 ease = 2
 
 [node name="PlayerManager" type="Node2D"]
-process_mode = 4
 
 [node name="Player1" type="RigidBody2D" parent="."]
 position = Vector2(0, -48)
