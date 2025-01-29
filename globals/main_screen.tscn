@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=20 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/scripts/main_screen.gd" id="1_gocdf"]
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
-[ext_resource type="Script" uid="uid://ctplnlyv1ojbe" path="res://globals/state_machine.gd" id="2_fsj25"]
+[ext_resource type="Script" path="res://globals/state_machine.gd" id="2_fsj25"]
 [ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/scripts/success_manager.gd" id="2_h6ngx"]
 [ext_resource type="Script" uid="uid://dfaass58xe75q" path="res://globals/game_states/intro_sequence_state.gd" id="3_raqj2"]
 [ext_resource type="Script" uid="uid://biplvsujsor06" path="res://globals/scripts/level_timer.gd" id="3_t6heb"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://d4ad76tn55erm" path="res://globals/game_states/success_state.gd" id="7_1n5nj"]
 [ext_resource type="Texture2D" uid="uid://tr5l831ebxr4" path="res://ui/assets/go.png" id="7_nb7wt"]
 [ext_resource type="Script" uid="uid://c6r138ykxrr1c" path="res://globals/state.gd" id="7_tla75"]
+[ext_resource type="Script" uid="uid://b6b1fmjmod01l" path="res://globals/game_states/main_menu_state.gd" id="9_8us2b"]
+[ext_resource type="PackedScene" uid="uid://b6ugu4slromtn" path="res://levels/main_menu.tscn" id="10_71vs2"]
 
 [sub_resource type="Theme" id="Theme_raqj2"]
 
@@ -46,7 +48,7 @@ script = ExtResource("1_gocdf")
 
 [node name="GameStates" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("2_fsj25")
-CURRENT_STATE = NodePath("Loading")
+CURRENT_STATE = NodePath("MainMenu")
 
 [node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "intro")]
 script = ExtResource("3_raqj2")
@@ -70,11 +72,16 @@ metadata/_custom_type_script = ExtResource("7_tla75")
 [node name="InGameMenu" type="Node" parent="GameStates"]
 script = ExtResource("5_1n5nj")
 
-[node name="MainMenu" type="Node" parent="GameStates"]
+[node name="MainMenu" type="Node" parent="GameStates" node_paths=PackedStringArray("main_menu")]
+script = ExtResource("9_8us2b")
+main_menu = NodePath("../../CanvasLayer/MainMenu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("10_71vs2")]
+
 [node name="LoadScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("progress_bar")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,6 +201,7 @@ text = "Press any button to continue"
 [node name="LevelHolder" type="Node" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 120)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 process_priority = 300

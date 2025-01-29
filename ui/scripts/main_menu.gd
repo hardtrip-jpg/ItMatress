@@ -1,4 +1,5 @@
 extends Control
+class_name MainMenuScene
 
 @export var play_button : Button
 @export var quit_button : Button

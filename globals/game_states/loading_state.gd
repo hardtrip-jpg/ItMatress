@@ -1,38 +1,35 @@
 extends State
 class_name LoadingState
 
-func enter(_previous_state : State) -> void:
-	pass
-
 @export var loading_screen : LoadingScreen
 @export var level_holder : Node
 
 var level_instance : Node
 var cur_level_path : String
-var loading := false
 
 func _ready() -> void:
 	Global.loaded_save = SaveResource.new(1)
 	SignalManager.load_level.connect(load_level)
 	Console.add_command("loadlevel", load_level, ["level_name"], 1, "Load a level based on scene name")
-	load_level("main_menu")
 
-func _process(delta: float) -> void:
-	if loading:
-		var progress := []
-		var status := ResourceLoader.load_threaded_get_status(cur_level_path, progress)
-		if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-			Console.print_line(str(progress[0] * 100), true)
-			loading_screen.progress_bar.value = progress[0] * 100
-		elif status == ResourceLoader.THREAD_LOAD_LOADED:
-			loading = false
-			loading_screen.hide()
-			Console.print_line("Level Loaded", true)
-			change_scene(ResourceLoader.load_threaded_get(cur_level_path))
-			transition.emit("IntroSequence")
-		elif status == ResourceLoader.THREAD_LOAD_FAILED:
-			Console.print_error("%s failed to load" % cur_level_path, true)
-			loading = false
+func enter(_previous_state : State) -> void:
+	loading_screen.show()
+
+func update(delta: float) -> void:
+	var progress := []
+	var status := ResourceLoader.load_threaded_get_status(cur_level_path, progress)
+	if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		Console.print_line(str(progress[0] * 100), true)
+		loading_screen.progress_bar.value = progress[0] * 100
+	elif status == ResourceLoader.THREAD_LOAD_LOADED:
+		loading_screen.hide()
+		Console.print_line("Level Loaded", true)
+		change_scene(ResourceLoader.load_threaded_get(cur_level_path))
+		transition.emit("IntroSequence")
+	elif status == ResourceLoader.THREAD_LOAD_FAILED:
+		Console.print_error("%s failed to load" % cur_level_path, true)
+		transition.emit("MainMenu")
+
 
 func unload_level() -> void:
 	if is_instance_valid(level_instance):
@@ -50,12 +47,12 @@ func load_level(level_name : String) -> void:
 	cur_level_path = level_path
 	Global.current_level = level_name
 	
-	loading_screen.show()
+	transition.emit("Loading")
+
 	if(ResourceLoader.has_cached(level_path)):
 		ResourceLoader.load_threaded_get(level_path)
 	else:
 		ResourceLoader.load_threaded_request(level_path, "", true)
-		loading = true
 
 func change_scene(resource : PackedScene) -> void:
 	level_instance = resource.instantiate()
