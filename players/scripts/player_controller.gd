@@ -2,9 +2,13 @@ extends RigidBody2D
 class_name PlayerController
 
 @export var player_id : int = 1
+@export var enabled : bool = false
 
 
 func _physics_process(delta: float) -> void:
+	if enabled == false:
+		return
+	
 	var main_input_vector : Vector2
 	match player_id:
 		1:

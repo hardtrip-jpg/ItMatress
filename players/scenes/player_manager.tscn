@@ -41,6 +41,7 @@ shape = SubResource("CircleShape2D_71twf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player1" node_paths=PackedStringArray("other_player")]
 modulate = Color(0.964236, 0, 0.279699, 1)
+y_sort_enabled = true
 texture_filter = 1
 position = Vector2(0.024847, 0.0214373)
 rotation = 3.14159
@@ -62,6 +63,7 @@ shape = SubResource("CircleShape2D_71twf")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Player2" node_paths=PackedStringArray("other_player")]
 modulate = Color(0.22906, 0.485001, 1, 1)
+y_sort_enabled = true
 texture_filter = 1
 texture = ExtResource("2_v7efa")
 offset = Vector2(2, -2)
@@ -77,11 +79,13 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4ihkx")
 
 [node name="Sprite2D2" type="Sprite2D" parent="MatressTop"]
+y_sort_enabled = true
 texture_filter = 3
 position = Vector2(0, 20)
 texture = ExtResource("3_wm554")
 
 [node name="Sprite2D" type="Sprite2D" parent="MatressTop"]
+y_sort_enabled = true
 texture_filter = 3
 texture = ExtResource("2_ahlmt")
 
@@ -94,6 +98,7 @@ position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_ahlmt")
 
 [node name="Sprite2D" type="Sprite2D" parent="MatressBottom"]
+y_sort_enabled = true
 texture_filter = 3
 position = Vector2(0.0166855, 0.0187578)
 rotation = 3.14159
