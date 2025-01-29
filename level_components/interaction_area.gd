@@ -7,5 +7,6 @@ func _ready() -> void:
 	body_entered.connect(on_enter)
 
 func on_enter(body: Node2D) -> void:
-	monitoring = false
+	var collision : CollisionShape2D = get_child(0)
+	collision.disabled = true
 	interaction.interact()

@@ -35,7 +35,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="MainScreen" type="Control" node_paths=PackedStringArray("loading_screen", "level_holder")]
+[node name="MainScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,30 +43,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gocdf")
-loading_screen = NodePath("CanvasLayer/LoadScreen")
-level_holder = NodePath("LevelHolder")
 
 [node name="GameStates" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("2_fsj25")
-CURRENT_STATE = NodePath("IntroSequence")
+CURRENT_STATE = NodePath("Loading")
 
-[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer")]
+[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "intro")]
 script = ExtResource("3_raqj2")
 timer = NodePath("../../CanvasLayer/UI/Timer")
+intro = NodePath("../../CanvasLayer/IntroSequence")
 
 [node name="Active" type="Node" parent="GameStates"]
 script = ExtResource("4_tla75")
 
-[node name="Menu" type="Node" parent="GameStates"]
-script = ExtResource("5_1n5nj")
-
-[node name="Loading" type="Node" parent="GameStates"]
+[node name="Loading" type="Node" parent="GameStates" node_paths=PackedStringArray("loading_screen", "level_holder")]
 script = ExtResource("6_8us2b")
+loading_screen = NodePath("../../CanvasLayer/LoadScreen")
+level_holder = NodePath("../../LevelHolder")
 
-[node name="Success" type="Node" parent="GameStates" node_paths=PackedStringArray("success_screen")]
+[node name="Success" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "success_screen")]
 script = ExtResource("7_1n5nj")
+timer = NodePath("../../CanvasLayer/UI/Timer")
 success_screen = NodePath("../../CanvasLayer/UI/Success")
 metadata/_custom_type_script = ExtResource("7_tla75")
+
+[node name="InGameMenu" type="Node" parent="GameStates"]
+script = ExtResource("5_1n5nj")
+
+[node name="MainMenu" type="Node" parent="GameStates"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
