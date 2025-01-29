@@ -18,3 +18,4 @@ func play_game() -> void:
 
 func quit_game() -> void:
 	get_tree().quit()
+	

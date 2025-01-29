@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://c62qhu20r8a24"]
+[gd_scene load_steps=13 format=3 uid="uid://c62qhu20r8a24"]
 
 [ext_resource type="Script" uid="uid://di0cvsshwjc64" path="res://players/scripts/player_controller.gd" id="1_4ihkx"]
+[ext_resource type="Script" uid="uid://brx76edt3l1aa" path="res://players/scripts/player_manager.gd" id="1_mkwqq"]
 [ext_resource type="Texture2D" uid="uid://bhrnr2dq2f472" path="res://players/assets/matress_end.png" id="2_ahlmt"]
 [ext_resource type="Texture2D" uid="uid://dapwhjod7nks" path="res://players/assets/player.png" id="2_v7efa"]
 [ext_resource type="Script" uid="uid://dcxxxtpvsa3mw" path="res://players/scripts/player_sprite.gd" id="3_4raac"]
@@ -23,7 +24,10 @@ duration = 1.0
 transition = 6
 ease = 2
 
-[node name="PlayerManager" type="Node2D"]
+[node name="PlayerManager" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
+script = ExtResource("1_mkwqq")
+player_1 = NodePath("Player1")
+player_2 = NodePath("Player2")
 
 [node name="Player1" type="RigidBody2D" parent="."]
 position = Vector2(0, -48)
