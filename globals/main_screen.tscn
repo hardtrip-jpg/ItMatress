@@ -1,18 +1,20 @@
-[gd_scene load_steps=16 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=18 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/scripts/main_screen.gd" id="1_gocdf"]
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
-[ext_resource type="Script" path="res://globals/state_machine.gd" id="2_fsj25"]
+[ext_resource type="Script" uid="uid://ctplnlyv1ojbe" path="res://globals/state_machine.gd" id="2_fsj25"]
 [ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/scripts/success_manager.gd" id="2_h6ngx"]
 [ext_resource type="Script" uid="uid://dfaass58xe75q" path="res://globals/game_states/intro_sequence_state.gd" id="3_raqj2"]
 [ext_resource type="Script" uid="uid://biplvsujsor06" path="res://globals/scripts/level_timer.gd" id="3_t6heb"]
 [ext_resource type="Script" uid="uid://dny8jqm2ac500" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_1lk24"]
-[ext_resource type="Script" path="res://globals/game_states/active_state.gd" id="4_tla75"]
+[ext_resource type="Script" uid="uid://dnu0gurw53ic2" path="res://globals/game_states/active_state.gd" id="4_tla75"]
 [ext_resource type="Script" uid="uid://s2351ukpjljr" path="res://globals/game_states/menu_state.gd" id="5_1n5nj"]
 [ext_resource type="Texture2D" uid="uid://c1gjqui1vypsl" path="res://ui/assets/ready.png" id="5_o1vlk"]
 [ext_resource type="Script" uid="uid://be2ic41vikumb" path="res://globals/game_states/loading_state.gd" id="6_8us2b"]
 [ext_resource type="Texture2D" uid="uid://li0wdfx2wyje" path="res://ui/assets/set.png" id="6_fsj25"]
+[ext_resource type="Script" uid="uid://d4ad76tn55erm" path="res://globals/game_states/success_state.gd" id="7_1n5nj"]
 [ext_resource type="Texture2D" uid="uid://tr5l831ebxr4" path="res://ui/assets/go.png" id="7_nb7wt"]
+[ext_resource type="Script" uid="uid://c6r138ykxrr1c" path="res://globals/state.gd" id="7_tla75"]
 
 [sub_resource type="Theme" id="Theme_raqj2"]
 
@@ -48,8 +50,9 @@ level_holder = NodePath("LevelHolder")
 script = ExtResource("2_fsj25")
 CURRENT_STATE = NodePath("IntroSequence")
 
-[node name="IntroSequence" type="Node" parent="GameStates"]
+[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer")]
 script = ExtResource("3_raqj2")
+timer = NodePath("../../CanvasLayer/UI/Timer")
 
 [node name="Active" type="Node" parent="GameStates"]
 script = ExtResource("4_tla75")
@@ -59,6 +62,11 @@ script = ExtResource("5_1n5nj")
 
 [node name="Loading" type="Node" parent="GameStates"]
 script = ExtResource("6_8us2b")
+
+[node name="Success" type="Node" parent="GameStates" node_paths=PackedStringArray("success_screen")]
+script = ExtResource("7_1n5nj")
+success_screen = NodePath("../../CanvasLayer/UI/Success")
+metadata/_custom_type_script = ExtResource("7_tla75")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

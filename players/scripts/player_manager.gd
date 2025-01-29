@@ -6,9 +6,13 @@ class_name PlayerManager
 
 func _ready() -> void:
 	SignalManager.level_start.connect(level_start)
+	SignalManager.level_end.connect(level_end)
 	Console.add_command("levelstart", level_start)
-	level_start()
 
 func level_start() -> void:
 	player_1.enabled = true
 	player_2.enabled = true
+
+func level_end() -> void:
+	player_1.enabled = false
+	player_2.enabled = false
