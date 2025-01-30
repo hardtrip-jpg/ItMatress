@@ -1,13 +1,15 @@
 extends Node2D
-class_name IntroSequence
+class_name LevelCameraManager
 
-@export var animation_player : AnimationPlayer
-@export var label : Label
-@export var player : Node2D
+@export var camera : PhantomCamera2D
+@export var animation : AnimationPlayer
 
 
 func _ready() -> void:
-	player.process_mode = Node.PROCESS_MODE_DISABLED
-	await get_tree().create_timer(1).timeout
-	SignalManager.start_timer.emit()
-	player.process_mode = Node.PROCESS_MODE_INHERIT
+	camera.priority = 2
+	animation.play("intro")
+	SignalManager.stop_intro.connect(stop_intro)
+
+func stop_intro() -> void:
+	camera.priority = 0
+	animation.stop()

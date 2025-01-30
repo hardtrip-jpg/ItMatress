@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=19 format=3 uid="uid://8ihndydi4asp"]
 
-[ext_resource type="Script" uid="uid://dpk8sa2t8s3us" path="res://globals/scripts/main_screen.gd" id="1_gocdf"]
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
 [ext_resource type="Script" path="res://globals/state_machine.gd" id="2_fsj25"]
 [ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/scripts/success_manager.gd" id="2_h6ngx"]
@@ -34,7 +33,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [node name="MainScreen" type="Control"]
@@ -44,16 +43,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gocdf")
 
 [node name="GameStates" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("2_fsj25")
 CURRENT_STATE = NodePath("MainMenu")
 
-[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "intro")]
+[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "label", "animated_sprite")]
 script = ExtResource("3_raqj2")
 timer = NodePath("../../CanvasLayer/UI/Timer")
-intro = NodePath("../../CanvasLayer/IntroSequence")
+label = NodePath("../../CanvasLayer/IntroSequence/Label")
+animated_sprite = NodePath("../../CanvasLayer/IntroSequence/AnimatedSprite2D")
 
 [node name="Active" type="Node" parent="GameStates"]
 script = ExtResource("4_tla75")
@@ -127,6 +126,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Timer" type="Control" parent="CanvasLayer/UI" node_paths=PackedStringArray("timer", "label")]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 320.0
@@ -174,7 +174,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="IntroSequence" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,12 +184,16 @@ mouse_filter = 2
 theme = SubResource("Theme_raqj2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/IntroSequence"]
+visible = false
 texture_filter = 1
 position = Vector2(160, 112)
 scale = Vector2(3.2, 3.2)
 sprite_frames = SubResource("SpriteFrames_t1qt3")
+speed_scale = 0.0
 
 [node name="Label" type="Label" parent="CanvasLayer/IntroSequence"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 48.0
 offset_top = 200.0
