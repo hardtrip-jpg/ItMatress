@@ -44,5 +44,5 @@ func intro_sequence() -> void:
 	animated_sprite.frame = 1
 	await get_tree().create_timer(1).timeout
 	animated_sprite.frame = 2
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.4).timeout
 	transition.emit("Active")
