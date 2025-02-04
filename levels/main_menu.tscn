@@ -1,17 +1,22 @@
-[gd_scene load_steps=25 format=4 uid="uid://b6ugu4slromtn"]
+[gd_scene load_steps=33 format=4 uid="uid://b6ugu4slromtn"]
 
 [ext_resource type="PackedScene" uid="uid://djxf7brblh231" path="res://ui/assets/mattress__furniture_model/scene.gltf" id="1_0ettg"]
 [ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/scripts/main_menu.gd" id="1_6ymyu"]
+[ext_resource type="Theme" uid="uid://c73j2w4m5nvxt" path="res://ui/main_theme.tres" id="1_w3h5g"]
 [ext_resource type="Texture2D" uid="uid://dstdvt7a30kxb" path="res://ui/assets/1648290-export.png" id="2_7rktv"]
 [ext_resource type="Shader" uid="uid://cj2uasujyvqy3" path="res://ui/dithering.gdshader" id="3_nwbki"]
 [ext_resource type="Script" uid="uid://djegbvwlvyax8" path="res://ui/scripts/level_select_button.gd" id="4_7rktv"]
+[ext_resource type="Shader" uid="uid://c3vy47cc3o5uv" path="res://ui/clouds.gdshader" id="4_maniu"]
 [ext_resource type="Texture2D" uid="uid://hwmb31wwcmt4" path="res://ui/assets/bayer2tile16.png" id="4_pppj1"]
+[ext_resource type="Texture2D" uid="uid://bffjkihebria8" path="res://ui/assets/bubbles.png" id="5_t74b8"]
 [ext_resource type="Texture2D" uid="uid://bi4i0ywowg1wf" path="res://ui/assets/mattress__furniture_model/textures/Mattress_baseColor.png" id="6_7ty7c"]
 [ext_resource type="Texture2D" uid="uid://0gwou0mdwke6" path="res://ui/assets/mattress__furniture_model/textures/Mattress_metallicRoughness.png" id="7_lppu5"]
 [ext_resource type="Shader" uid="uid://cqjml54hqjteg" path="res://ui/outline.gdshader" id="8_6xkr4"]
 [ext_resource type="Texture2D" uid="uid://csco4fe481asg" path="res://ui/assets/mattress__furniture_model/textures/Mattress_normal.png" id="9_b8wrl"]
 [ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_6xkr4"]
+[ext_resource type="Texture2D" uid="uid://dyb1lju8501iw" path="res://ui/assets/logo.png" id="11_s01ir"]
 [ext_resource type="Script" uid="uid://dv7rrrh5t0nvs" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_b8wrl"]
+[ext_resource type="Script" uid="uid://pjbpbu35dhir" path="res://ui/scripts/logo_animation.gd" id="12_w3h5g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6flho"]
 shader = ExtResource("3_nwbki")
@@ -113,6 +118,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qwijl")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t74b8"]
+shader = ExtResource("4_maniu")
+shader_parameter/bottom_color = Color(1, 1, 0.917647, 1)
+shader_parameter/top_color = Color(1, 1, 1, 0)
+shader_parameter/tex = ExtResource("5_t74b8")
+shader_parameter/layer_count = 13
+shader_parameter/time_scale = 0.2
+shader_parameter/base_intensity = 0.423
+shader_parameter/size = 1.0
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ettg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -125,6 +140,10 @@ background_mode = 2
 sky = SubResource("Sky_duh7t")
 tonemap_mode = 2
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_maniu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3h5g"]
+
 [sub_resource type="Resource" id="Resource_s01ir"]
 script = ExtResource("12_b8wrl")
 duration = 0.0
@@ -132,12 +151,15 @@ transition = 0
 ease = 2
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button", "quit_button", "level_select", "main_screen")]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(240, 204)
+theme = ExtResource("1_w3h5g")
 script = ExtResource("1_6ymyu")
 play_button = NodePath("MainScreen/PlayButton")
 quit_button = NodePath("MainScreen/QuitButton")
@@ -171,9 +193,9 @@ transparent_bg = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
 size = Vector2i(320, 240)
 size_2d_override_stretch = true
-render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.76077)
@@ -189,9 +211,22 @@ autoplay = "rotate"
 
 [node name="Sketchfab_Scene" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_0ettg")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1.9)
+top_level = true
 
 [node name="Mattress_Low_Mattress_0" parent="SubViewportContainer/SubViewport/Sketchfab_Scene/Sketchfab_model/2eed11b07b9f4600a230a119699f91b5_fbx/RootNode/Mattress_Low" index="0"]
 mesh = SubResource("ArrayMesh_maniu")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Sketchfab_Scene"]
+show_behind_parent = true
+clip_children = 2
+z_as_relative = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_t74b8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.621435, -0.605913, 0.496677, 0.00510038, 0.637063, 0.770795, -0.783449, -0.476465, 0.398984, 0, 1.48816, 0)
@@ -200,7 +235,6 @@ transform = Transform3D(0.621435, -0.605913, 0.496677, 0.00510038, 0.637063, 0.7
 environment = SubResource("Environment_6ymyu")
 
 [node name="MainScreen" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -212,13 +246,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 119.5
-offset_top = 104.0
-offset_right = 160.5
-offset_bottom = 135.0
+offset_left = 112.0
+offset_top = 108.0
+offset_right = 168.0
+offset_bottom = 141.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_maniu")
 text = "Play"
+flat = true
+autowrap_mode = 2
+clip_text = true
+icon_alignment = 1
 
 [node name="QuitButton" type="Button" parent="MainScreen"]
 layout_mode = 1
@@ -227,29 +266,25 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 120.0
+offset_left = 112.0
 offset_top = 144.0
-offset_right = 162.0
+offset_right = 168.0
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w3h5g")
 text = "Quit
 "
+flat = true
 
-[node name="Label" type="Label" parent="MainScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 92.0
-offset_top = 60.0
-offset_right = 188.0
-offset_bottom = 83.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "it MATTRESS"
+[node name="TextureRect" type="TextureRect" parent="MainScreen"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 140.0
+pivot_offset = Vector2(164, 28)
+texture = ExtResource("11_s01ir")
+script = ExtResource("12_w3h5g")
 
 [node name="LevelSelect" type="Control" parent="."]
 layout_mode = 1
@@ -266,15 +301,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="LevelSelect/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LevelSelect/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="LevelSelect/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSelect/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Level Select"
@@ -290,14 +324,14 @@ alignment = 1
 
 [node name="Button" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "level 1"
+text = "Level 1"
 script = ExtResource("4_7rktv")
 level_name = "prototype_level"
 level_id = 1
 
 [node name="Button2" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "level 2"
+text = "Level 2"
 script = ExtResource("4_7rktv")
 level_name = "prototype_level_two"
 level_id = 2
@@ -308,19 +342,19 @@ alignment = 1
 
 [node name="Button3" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "level 3"
+text = "Level 3"
 script = ExtResource("4_7rktv")
 level_id = 3
 
 [node name="Button4" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "level 4"
+text = "Level 4"
 script = ExtResource("4_7rktv")
 level_id = 4
 
 [node name="Button5" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "level 5"
+text = "Level 5"
 script = ExtResource("4_7rktv")
 level_id = 5
 

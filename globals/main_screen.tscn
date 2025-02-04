@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=26 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
 [ext_resource type="Script" path="res://globals/state_machine.gd" id="2_fsj25"]
@@ -16,8 +16,11 @@
 [ext_resource type="Script" uid="uid://c6r138ykxrr1c" path="res://globals/state.gd" id="7_tla75"]
 [ext_resource type="Script" uid="uid://b6b1fmjmod01l" path="res://globals/game_states/main_menu_state.gd" id="9_8us2b"]
 [ext_resource type="PackedScene" uid="uid://b6ugu4slromtn" path="res://levels/main_menu.tscn" id="10_71vs2"]
-
-[sub_resource type="Theme" id="Theme_raqj2"]
+[ext_resource type="Theme" uid="uid://c73j2w4m5nvxt" path="res://ui/main_theme.tres" id="10_bq0lu"]
+[ext_resource type="FontFile" uid="uid://dkxh8vke4del8" path="res://ui/assets/Dosmilcatorce.ttf" id="13_df5h0"]
+[ext_resource type="AudioStream" uid="uid://b5jilbs560awa" path="res://ui/assets/youtube_9bnUWuAO0oU_audio.mp3" id="15_kpd6p"]
+[ext_resource type="AudioStream" uid="uid://cf0jbp1y83e1f" path="res://ui/assets/youtube_KOoCEIwswYg_audio.mp3" id="17_bq0lu"]
+[ext_resource type="AudioStream" uid="uid://dg6nyiwqmnwwq" path="res://ui/assets/youtube_f64nXt1z4XU_audio.mp3" id="18_k1c06"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t1qt3"]
 animations = [{
@@ -30,11 +33,90 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_nb7wt")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": true,
 "name": &"default",
 "speed": 1.0
 }]
+
+[sub_resource type="Animation" id="Animation_bq0lu"]
+resource_name = "intro"
+length = 4.75
+step = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.42, 1.42, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.41, 1.39, 1.4, 3.2, 3.21),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.06667, 1.06667), Vector2(0.992, 0.992), Vector2(1.06667, 1.06667), Vector2(0.992, 0.992), Vector2(1.06667, 1.06667)]
+}
+
+[sub_resource type="Animation" id="Animation_k1c06"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.06667, 1.06667)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k1c06"]
+_data = {
+&"RESET": SubResource("Animation_k1c06"),
+&"intro": SubResource("Animation_bq0lu")
+}
 
 [node name="MainScreen" type="Control"]
 layout_mode = 3
@@ -48,24 +130,27 @@ grow_vertical = 2
 script = ExtResource("2_fsj25")
 CURRENT_STATE = NodePath("MainMenu")
 
-[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "label", "animated_sprite")]
+[node name="IntroSequence" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "label", "animated_sprite", "animation_player")]
 script = ExtResource("3_raqj2")
 timer = NodePath("../../CanvasLayer/UI/Timer")
 label = NodePath("../../CanvasLayer/IntroSequence/Label")
 animated_sprite = NodePath("../../CanvasLayer/IntroSequence/AnimatedSprite2D")
+animation_player = NodePath("../../CanvasLayer/IntroSequence/AnimationPlayer")
 
-[node name="Active" type="Node" parent="GameStates"]
+[node name="Active" type="Node" parent="GameStates" node_paths=PackedStringArray("audio")]
 script = ExtResource("4_tla75")
+audio = NodePath("../../CanvasLayer/LevelMusic")
 
 [node name="Loading" type="Node" parent="GameStates" node_paths=PackedStringArray("loading_screen", "level_holder")]
 script = ExtResource("6_8us2b")
 loading_screen = NodePath("../../CanvasLayer/LoadScreen")
 level_holder = NodePath("../../LevelHolder")
 
-[node name="Success" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "success_screen")]
+[node name="Success" type="Node" parent="GameStates" node_paths=PackedStringArray("timer", "success_screen", "audio")]
 script = ExtResource("7_1n5nj")
 timer = NodePath("../../CanvasLayer/UI/Timer")
 success_screen = NodePath("../../CanvasLayer/UI/Success")
+audio = NodePath("../../CanvasLayer/UI/Success/Success")
 metadata/_custom_type_script = ExtResource("7_tla75")
 
 [node name="InGameMenu" type="Node" parent="GameStates"]
@@ -81,6 +166,7 @@ main_menu = NodePath("../../CanvasLayer/MainMenu")
 
 [node name="LoadScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("progress_bar")]
 visible = false
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,6 +174,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("10_bq0lu")
 script = ExtResource("2_5jtb1")
 progress_bar = NodePath("ProgressBar")
 
@@ -117,6 +204,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="UI" type="Control" parent="CanvasLayer"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,6 +212,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("10_bq0lu")
 
 [node name="Timer" type="Control" parent="CanvasLayer/UI" node_paths=PackedStringArray("timer", "label")]
 visible = false
@@ -140,11 +229,16 @@ label = NodePath("Label")
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/Timer"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_top = 4.0
+offset_right = 34.0
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_fonts/font = ExtResource("13_df5h0")
+theme_override_font_sizes/font_size = 17
 text = "0:00.0"
 horizontal_alignment = 1
 
@@ -173,7 +267,11 @@ text = "YOU WIN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Success" type="AudioStreamPlayer2D" parent="CanvasLayer/UI/Success"]
+stream = ExtResource("15_kpd6p")
+
 [node name="IntroSequence" type="Control" parent="CanvasLayer"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,13 +279,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = SubResource("Theme_raqj2")
+theme = ExtResource("10_bq0lu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/IntroSequence"]
 visible = false
 texture_filter = 1
-position = Vector2(160, 112)
-scale = Vector2(3.2, 3.2)
+position = Vector2(160, 129)
+scale = Vector2(1.06667, 1.06667)
 sprite_frames = SubResource("SpriteFrames_t1qt3")
 speed_scale = 0.0
 
@@ -196,10 +294,22 @@ visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 48.0
-offset_top = 200.0
+offset_top = 220.0
 offset_right = 272.0
-offset_bottom = 223.0
+offset_bottom = 232.0
+theme_override_font_sizes/font_size = 12
 text = "Press any button to continue"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/IntroSequence"]
+stream = ExtResource("17_bq0lu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/IntroSequence"]
+libraries = {
+&"": SubResource("AnimationLibrary_k1c06")
+}
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="CanvasLayer"]
+stream = ExtResource("18_k1c06")
 
 [node name="LevelHolder" type="Node" parent="."]
 

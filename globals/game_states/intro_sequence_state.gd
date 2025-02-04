@@ -4,6 +4,7 @@ class_name IntroSequenceState
 @export var timer : LevelTimer
 @export var label : Label
 @export var animated_sprite : AnimatedSprite2D
+@export var animation_player : AnimationPlayer
 
 var can_end_cutscene : bool = false
 
