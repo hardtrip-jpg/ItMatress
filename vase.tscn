@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjt1vjugx37uh"]
+
+[ext_resource type="Script" uid="uid://brwhevwfa6ogu" path="res://level_components/interaction_area.gd" id="1_1rscs"]
+[ext_resource type="Script" uid="uid://vvh5uh2sqy3q" path="res://level_components/vase_breaking.gd" id="2_m8sn8"]
+[ext_resource type="Script" uid="uid://cvunryeap6hyo" path="res://level_components/interaction_component.gd" id="3_4l7f1"]
+[ext_resource type="Texture2D" uid="uid://m0qp4tjte5lt" path="res://level_components/assets/ME_Singles_Villas_16x16_Villa_Props_2.png" id="4_m8sn8"]
+[ext_resource type="AudioStream" uid="uid://5bmtsjynj3vx" path="res://level_components/assets/540337__clearwavsound__clay-jar-break.wav" id="5_4l7f1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl8gb"]
+size = Vector2(8, 12)
+
+[node name="Vase" type="Area2D" node_paths=PackedStringArray("interaction")]
+script = ExtResource("1_1rscs")
+interaction = NodePath("InteractionComponent")
+metadata/_custom_type_script = ExtResource("1_1rscs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_rl8gb")
+
+[node name="InteractionComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "sound")]
+script = ExtResource("2_m8sn8")
+sprite = NodePath("../Sprite2D")
+sound = NodePath("../AudioStreamPlayer2D")
+metadata/_custom_type_script = ExtResource("3_4l7f1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("4_m8sn8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4l7f1")

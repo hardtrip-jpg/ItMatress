@@ -1,7 +1,7 @@
 extends State
 class_name ActiveGameState
 
-@export var audio : AudioStreamPlayer2D
+@export var audio : AudioStreamPlayer
 
 func enter(_previous_state : State) -> void:
 	audio.play(0.6)

@@ -7,3 +7,5 @@ signal succeed_level
 signal level_start
 
 signal stop_intro
+
+signal add_to_timer(time_added : float)

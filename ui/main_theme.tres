@@ -32,12 +32,12 @@ shadow_offset = Vector2(1, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_maniu"]
-bg_color = Color(0.917647, 0.909804, 0.862745, 1)
+bg_color = Color(0.917647, 0.909804, 0.862745, 0.584314)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.361284, 0.156733, 7.21961e-08, 1)
+border_color = Color(0.384314, 0.333333, 0.396078, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -52,7 +52,7 @@ shadow_offset = Vector2(1, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t74b8"]
-bg_color = Color(0.917386, 0.910244, 0.86461, 1)
+bg_color = Color(0.917647, 0.909804, 0.862745, 0.239216)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3

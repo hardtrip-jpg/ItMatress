@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://b6ugu4slromtn"]
+[gd_scene load_steps=37 format=4 uid="uid://b6ugu4slromtn"]
 
 [ext_resource type="PackedScene" uid="uid://djxf7brblh231" path="res://ui/assets/mattress__furniture_model/scene.gltf" id="1_0ettg"]
 [ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/scripts/main_menu.gd" id="1_6ymyu"]
@@ -118,16 +118,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qwijl")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t74b8"]
-shader = ExtResource("4_maniu")
-shader_parameter/bottom_color = Color(1, 1, 0.917647, 1)
-shader_parameter/top_color = Color(1, 1, 1, 0)
-shader_parameter/tex = ExtResource("5_t74b8")
-shader_parameter/layer_count = 13
-shader_parameter/time_scale = 0.2
-shader_parameter/base_intensity = 0.423
-shader_parameter/size = 1.0
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ettg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -139,6 +129,35 @@ sky_material = SubResource("ProceduralSkyMaterial_0ettg")
 background_mode = 2
 sky = SubResource("Sky_duh7t")
 tonemap_mode = 2
+
+[sub_resource type="Curve" id="Curve_t74b8"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -97.9509), 0.0, 0.0, 0, 0, Vector2(1, 91.546), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_i73i7"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.990151, 38.0982), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_fvxt4"]
+_limits = [-28.8957, 60.4294, 0.0, 1.0]
+_data = [Vector2(0.00833333, 44.9345), 0.0, 0.0, 0, 0, Vector2(0.990151, 60.4294), -18.1507, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_e1bfw"]
+_data = [Vector2(0.0204545, 0), 0.0, 0.0, 0, 0, Vector2(0.481061, 1), 0.0, 0.0, 0, 0, Vector2(0.935606, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t74b8"]
+shader = ExtResource("4_maniu")
+shader_parameter/bottom_color = Color(1, 1, 0.917647, 1)
+shader_parameter/top_color = Color(1, 1, 1, 0)
+shader_parameter/tex = ExtResource("5_t74b8")
+shader_parameter/layer_count = 13
+shader_parameter/time_scale = 0.2
+shader_parameter/base_intensity = 0.423
+shader_parameter/size = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_maniu"]
 
@@ -196,12 +215,13 @@ snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(320, 240)
 size_2d_override_stretch = true
+render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.76077)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.25004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.08159)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Node3D"]
 libraries = {
@@ -216,7 +236,44 @@ top_level = true
 [node name="Mattress_Low_Mattress_0" parent="SubViewportContainer/SubViewport/Sketchfab_Scene/Sketchfab_model/2eed11b07b9f4600a230a119699f91b5_fbx/RootNode/Mattress_Low" index="0"]
 mesh = SubResource("ArrayMesh_maniu")
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Sketchfab_Scene"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.621435, -0.605913, 0.496677, 0.00510038, 0.637063, 0.770795, -0.783449, -0.476465, 0.398984, 0, 1.48816, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_6ymyu")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.82164)
+amount = 35
+lifetime = 2.0
+speed_scale = 0.5
+randomness = 1.0
+mesh = SubResource("ArrayMesh_maniu")
+emission_shape = 1
+emission_sphere_radius = 2.23
+particle_flag_rotate_y = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.3
+initial_velocity_max = 0.3
+angular_velocity_min = 1.0
+angular_velocity_max = 2.0
+angular_velocity_curve = SubResource("Curve_t74b8")
+linear_accel_min = 1.0
+linear_accel_max = 3.0
+linear_accel_curve = SubResource("Curve_i73i7")
+radial_accel_min = -1.0
+radial_accel_max = 1.0
+radial_accel_curve = SubResource("Curve_fvxt4")
+damping_min = 1.0
+damping_max = 3.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_e1bfw")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
 show_behind_parent = true
 clip_children = 2
 z_as_relative = false
@@ -227,12 +284,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.621435, -0.605913, 0.496677, 0.00510038, 0.637063, 0.770795, -0.783449, -0.476465, 0.398984, 0, 1.48816, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
-environment = SubResource("Environment_6ymyu")
 
 [node name="MainScreen" type="Control" parent="."]
 anchors_preset = 0

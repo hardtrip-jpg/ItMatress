@@ -3,6 +3,7 @@ class_name LevelTimer
 
 @export var timer : Timer
 @export var label : Label
+@export var add_time_label : Label
 
 var current_time : float = 0.0
 var current_min : int = 0
@@ -11,7 +12,9 @@ var current_micro : int = 0
 
 func _ready() -> void:
 	timer.timeout.connect(_timer_update)
+	SignalManager.add_to_timer.connect(add_time)
 	Console.add_command("start_timer", start_timer)
+	Console.add_command("add_time", add_time_command, 1)
 
 func start_timer() -> void:
 	show()
@@ -52,3 +55,15 @@ func _update_label() -> void:
 	label.text = "%s:%s.%s" % [string_min, string_sec, string_micro]
 	
 	
+func add_time(time_added : float) -> void:
+	current_sec += time_added
+	_update_label()
+	add_time_label.text = "+%s sec" % [time_added]
+	add_time_label.modulate.a = 1
+	add_time_label.position.y = 20
+	var tween := get_tree().create_tween().set_ease(Tween.EASE_IN)
+	tween.tween_property(add_time_label,"modulate:a", 0, 0.6)
+	tween.parallel().tween_property(add_time_label,"position:y", 0, 0.6)
+
+func add_time_command(input : String) -> void:
+	add_time(float(input))
