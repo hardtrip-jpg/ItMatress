@@ -286,9 +286,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainScreen" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PlayButton" type="Button" parent="MainScreen"]
 layout_mode = 1
@@ -297,10 +300,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 112.0
-offset_top = 108.0
-offset_right = 168.0
-offset_bottom = 141.0
+offset_left = -28.0
+offset_top = -95.0
+offset_right = 28.0
+offset_bottom = -62.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_maniu")
@@ -311,22 +314,24 @@ clip_text = true
 icon_alignment = 1
 
 [node name="QuitButton" type="Button" parent="MainScreen"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 112.0
-offset_top = 144.0
-offset_right = 168.0
-offset_bottom = 175.0
+offset_left = -23.0
+offset_top = -58.0
+offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_w3h5g")
 text = "Quit
 "
 flat = true
+text_overrun_behavior = 1
+autowrap_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="MainScreen"]
 layout_mode = 0

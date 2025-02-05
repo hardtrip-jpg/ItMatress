@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
-[ext_resource type="Script" path="res://globals/state_machine.gd" id="2_fsj25"]
+[ext_resource type="Script" uid="uid://ctplnlyv1ojbe" path="res://globals/state_machine.gd" id="2_fsj25"]
 [ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/scripts/success_manager.gd" id="2_h6ngx"]
 [ext_resource type="Script" uid="uid://dfaass58xe75q" path="res://globals/game_states/intro_sequence_state.gd" id="3_raqj2"]
 [ext_resource type="Script" uid="uid://biplvsujsor06" path="res://globals/scripts/level_timer.gd" id="3_t6heb"]

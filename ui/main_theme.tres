@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c73j2w4m5nvxt"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://c73j2w4m5nvxt"]
 
 [ext_resource type="FontFile" uid="uid://dkxh8vke4del8" path="res://ui/assets/Dosmilcatorce.ttf" id="1_3xb56"]
 [ext_resource type="FontFile" uid="uid://cxfolhy58pgb0" path="res://ui/assets/SuperMario256.ttf" id="2_3xb56"]
@@ -33,9 +33,6 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_maniu"]
 bg_color = Color(0.917647, 0.909804, 0.862745, 0.584314)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.384314, 0.333333, 0.396078, 1)
 corner_radius_top_left = 3
@@ -47,15 +44,11 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
-shadow_size = 3
 shadow_offset = Vector2(1, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t74b8"]
 bg_color = Color(0.917647, 0.909804, 0.862745, 0.239216)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.180392, 0.133333, 0.184314, 1)
 corner_radius_top_left = 3
@@ -84,6 +77,18 @@ corner_radius_bottom_left = 3
 corner_detail = 2
 shadow_offset = Vector2(1, 1)
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsmgg"]
+bg_color = Color(0.117183, 0.0825708, 0.120071, 0.913725)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.386087, 0.301678, 0.393056, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6tukj"]
 bg_color = Color(0.654902, 0.654902, 0.654902, 0.105882)
@@ -129,6 +134,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_maniu")
 Button/styles/normal = SubResource("StyleBoxFlat_t74b8")
 Button/styles/pressed = SubResource("StyleBoxFlat_i73i7")
 HBoxContainer/constants/separation = 9
+Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0.180392, 0.133333, 0.184314, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 Label/constants/outline_size = 9
@@ -139,6 +145,7 @@ MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 15
 MarginContainer/constants/margin_right = 15
 MarginContainer/constants/margin_top = 15
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_lsmgg")
 ProgressBar/font_sizes/font_size = 16
 ProgressBar/fonts/font = ExtResource("1_3xb56")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_6tukj")
