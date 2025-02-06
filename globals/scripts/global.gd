@@ -1,7 +1,9 @@
 extends Node
 
-var loaded_save : SaveResource
+var loaded_save : SaveResource = SaveResource.new(0)
 var current_level : String
+
+var current_level_data : LevelData
 
 func _ready() -> void:
 	Console.add_command("savelevel", set_level, ["New Level Amount"])

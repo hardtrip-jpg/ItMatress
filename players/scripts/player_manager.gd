@@ -7,6 +7,7 @@ class_name PlayerManager
 func _ready() -> void:
 	SignalManager.level_start.connect(level_start)
 	SignalManager.succeed_level.connect(level_end)
+	SignalManager.fail_level.connect(level_end)
 	Console.add_command("levelstart", level_start)
 
 func level_start() -> void:

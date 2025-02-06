@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://b6ugu4slromtn"]
+[gd_scene load_steps=38 format=4 uid="uid://b6ugu4slromtn"]
 
 [ext_resource type="PackedScene" uid="uid://djxf7brblh231" path="res://ui/assets/mattress__furniture_model/scene.gltf" id="1_0ettg"]
 [ext_resource type="Script" uid="uid://gmwpravrh11k" path="res://ui/scripts/main_menu.gd" id="1_6ymyu"]
@@ -14,9 +14,20 @@
 [ext_resource type="Shader" uid="uid://cqjml54hqjteg" path="res://ui/outline.gdshader" id="8_6xkr4"]
 [ext_resource type="Texture2D" uid="uid://csco4fe481asg" path="res://ui/assets/mattress__furniture_model/textures/Mattress_normal.png" id="9_b8wrl"]
 [ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_6xkr4"]
-[ext_resource type="Texture2D" uid="uid://dyb1lju8501iw" path="res://ui/assets/logo.png" id="11_s01ir"]
 [ext_resource type="Script" uid="uid://dv7rrrh5t0nvs" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_b8wrl"]
 [ext_resource type="Script" uid="uid://pjbpbu35dhir" path="res://ui/scripts/logo_animation.gd" id="12_w3h5g"]
+[ext_resource type="Texture2D" uid="uid://cad0tmav2kwdw" path="res://ui/assets/logo_it.png" id="13_i73i7"]
+[ext_resource type="Texture2D" uid="uid://bbk53qxy6ay41" path="res://ui/assets/logo_mattress.png" id="14_e1bfw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t74b8"]
+shader = ExtResource("4_maniu")
+shader_parameter/bottom_color = Color(1, 1, 0.917647, 1)
+shader_parameter/top_color = Color(1, 1, 1, 0)
+shader_parameter/tex = ExtResource("5_t74b8")
+shader_parameter/layer_count = 13
+shader_parameter/time_scale = 0.2
+shader_parameter/base_intensity = 0.423
+shader_parameter/size = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6flho"]
 shader = ExtResource("3_nwbki")
@@ -149,16 +160,6 @@ point_count = 2
 _data = [Vector2(0.0204545, 0), 0.0, 0.0, 0, 0, Vector2(0.481061, 1), 0.0, 0.0, 0, 0, Vector2(0.935606, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t74b8"]
-shader = ExtResource("4_maniu")
-shader_parameter/bottom_color = Color(1, 1, 0.917647, 1)
-shader_parameter/top_color = Color(1, 1, 1, 0)
-shader_parameter/tex = ExtResource("5_t74b8")
-shader_parameter/layer_count = 13
-shader_parameter/time_scale = 0.2
-shader_parameter/base_intensity = 0.423
-shader_parameter/size = 1.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_maniu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3h5g"]
@@ -197,6 +198,16 @@ texture = ExtResource("2_7rktv")
 expand_mode = 3
 stretch_mode = 4
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_as_relative = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_t74b8")
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_6flho")
@@ -215,6 +226,7 @@ snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(320, 240)
 size_2d_override_stretch = true
+render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
@@ -273,18 +285,6 @@ scale_amount_min = 0.5
 scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_e1bfw")
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
-show_behind_parent = true
-clip_children = 2
-z_as_relative = false
-texture_filter = 1
-material = SubResource("ShaderMaterial_t74b8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="MainScreen" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -300,30 +300,28 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -95.0
-offset_right = 28.0
-offset_bottom = -62.0
+offset_left = -22.255
+offset_top = -83.0
+offset_right = 22.255
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_maniu")
 text = "Play"
 flat = true
-autowrap_mode = 2
-clip_text = true
 icon_alignment = 1
 
 [node name="QuitButton" type="Button" parent="MainScreen"]
-clip_contents = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -58.0
-offset_right = 20.0
+offset_left = -22.0
+offset_top = -50.0
+offset_right = 21.0
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_w3h5g")
@@ -333,16 +331,44 @@ flat = true
 text_overrun_behavior = 1
 autowrap_mode = 1
 
+[node name="TextureRect2" type="TextureRect" parent="MainScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -96.0
+offset_right = 150.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.84, 0.84)
+pivot_offset = Vector2(150, 50)
+texture = ExtResource("13_i73i7")
+script = ExtResource("12_w3h5g")
+scale_tween = false
+
 [node name="TextureRect" type="TextureRect" parent="MainScreen"]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 320.0
-offset_bottom = 140.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -63.0
+offset_right = 160.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(164, 28)
-texture = ExtResource("11_s01ir")
+texture = ExtResource("14_e1bfw")
 script = ExtResource("12_w3h5g")
 
 [node name="LevelSelect" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://d0dvysy8uaxpq"]
+
+[ext_resource type="Script" uid="uid://jqmtq84bij07" path="res://globals/scripts/level_data.gd" id="1_j3fmc"]
+
+[resource]
+script = ExtResource("1_j3fmc")
+micro_required = 0
+sec_required = 0
+min_required = 1
+micro_silver = 0
+sec_silver = 15
+min_silver = 0
+micro_gold = 0
+sec_gold = 30
+min_gold = 0
+metadata/_custom_type_script = ExtResource("1_j3fmc")

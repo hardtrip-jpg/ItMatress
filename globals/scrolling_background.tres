@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://kqtii4xu51uq"]
+
+[ext_resource type="Shader" uid="uid://cdoe3xnh07tq5" path="res://ui/scrolling.gdshader" id="1_kkauk"]
+[ext_resource type="Texture2D" uid="uid://cajm6wr5v23yc" path="res://ui/assets/scrolling.png" id="2_5u3yw"]
+
+[resource]
+shader = ExtResource("1_kkauk")
+shader_parameter/scroll_speed = 0.05
+shader_parameter/angle_degrees = 45.0
+shader_parameter/repeat_x = 20.0
+shader_parameter/repeat_y = 15.98
+shader_parameter/row_offset = 0.072
+shader_parameter/texture_to_scroll = ExtResource("2_5u3yw")

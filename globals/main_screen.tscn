@@ -1,7 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://8ihndydi4asp"]
+[gd_scene load_steps=29 format=3 uid="uid://8ihndydi4asp"]
 
 [ext_resource type="Script" uid="uid://rtxv63v3wxa6" path="res://globals/scripts/load_screen.gd" id="2_5jtb1"]
-[ext_resource type="Script" uid="uid://ctplnlyv1ojbe" path="res://globals/state_machine.gd" id="2_fsj25"]
+[ext_resource type="Script" path="res://globals/state_machine.gd" id="2_fsj25"]
 [ext_resource type="Script" uid="uid://b7rh4aj5oy3cm" path="res://ui/scripts/success_manager.gd" id="2_h6ngx"]
 [ext_resource type="Script" uid="uid://dfaass58xe75q" path="res://globals/game_states/intro_sequence_state.gd" id="3_raqj2"]
 [ext_resource type="Script" uid="uid://biplvsujsor06" path="res://globals/scripts/level_timer.gd" id="3_t6heb"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ugu4slromtn" path="res://levels/main_menu.tscn" id="10_71vs2"]
 [ext_resource type="Theme" uid="uid://c73j2w4m5nvxt" path="res://ui/main_theme.tres" id="10_bq0lu"]
 [ext_resource type="FontFile" uid="uid://dkxh8vke4del8" path="res://ui/assets/Dosmilcatorce.ttf" id="13_df5h0"]
+[ext_resource type="Material" uid="uid://kqtii4xu51uq" path="res://globals/scrolling_background.tres" id="13_fvuq7"]
 [ext_resource type="AudioStream" uid="uid://b5jilbs560awa" path="res://ui/assets/youtube_9bnUWuAO0oU_audio.mp3" id="15_kpd6p"]
 [ext_resource type="AudioStream" uid="uid://dg6nyiwqmnwwq" path="res://ui/assets/youtube_f64nXt1z4XU_audio.mp3" id="18_k1c06"]
 [ext_resource type="AudioStream" uid="uid://bljwttum8ajnb" path="res://ui/assets/New 2 2025-02-04 1657.mp3" id="19_kpd6p"]
@@ -184,6 +185,7 @@ stream = ExtResource("9_8xq3k")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("10_71vs2")]
+visible = false
 
 [node name="LoadScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("progress_bar")]
 visible = false
@@ -200,6 +202,8 @@ script = ExtResource("2_5jtb1")
 progress_bar = NodePath("ProgressBar")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LoadScreen"]
+texture_filter = 1
+material = ExtResource("13_fvuq7")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -259,6 +263,7 @@ offset_top = 4.0
 offset_right = 34.0
 offset_bottom = 30.0
 grow_horizontal = 2
+pivot_offset = Vector2(34, 0)
 theme_override_fonts/font = ExtResource("13_df5h0")
 theme_override_font_sizes/font_size = 17
 text = "0:00.0"
@@ -363,3 +368,16 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("4_1lk24")
 metadata/_custom_type_script = ExtResource("4_1lk24")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+z_index = -2
+material = ExtResource("13_fvuq7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_top = -152.0
+offset_right = 202.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
