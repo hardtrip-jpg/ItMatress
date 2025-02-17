@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func set_level(new : int) -> void:
 	loaded_save.furthest_level = new
+	SignalManager.level_amount_updated.emit()
 
 func win() -> void:
-	SignalManager.stop_timer.emit()
 	SignalManager.succeed_level.emit()

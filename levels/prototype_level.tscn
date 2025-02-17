@@ -384,8 +384,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_yjhn6")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mfg5r"]
-blend_mode = 2
-light_mode = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qd0o6"]
 texture = ExtResource("4_6lfjr")
@@ -470,7 +468,10 @@ tile_map_data = PackedByteArray("AAAKAAgAAAAuADgAAAAKAAkAAAAuADgAAAAKAAoAAAAuADg
 tile_set = ExtResource("2_6lfjr")
 y_sort_origin = 10
 
-[node name="Shadow" type="TileMapLayer" parent="."]
+[node name="Shadow" type="Node2D" parent="."]
+visible = false
+
+[node name="Shadow" type="TileMapLayer" parent="Shadow"]
 visible = false
 clip_children = 1
 z_index = -3

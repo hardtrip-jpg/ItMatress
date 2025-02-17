@@ -47,6 +47,8 @@ func _timer_update() -> void:
 	_update_label()
 
 func _update_label() -> void:
+	if current_min == 0 and current_sec == 0 and current_micro == 0:
+		SignalManager.fail_level.emit()
 	var string_min := str(current_min)
 	var string_sec := str(current_sec).pad_zeros(2)
 	var string_micro := str(current_micro)

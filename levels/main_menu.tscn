@@ -318,10 +318,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -22.0
-offset_top = -50.0
-offset_right = 21.0
-offset_bottom = -17.0
+offset_left = -21.0
+offset_top = -51.0
+offset_right = 22.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_w3h5g")
@@ -348,7 +348,6 @@ scale = Vector2(0.84, 0.84)
 pivot_offset = Vector2(150, 50)
 texture = ExtResource("13_i73i7")
 script = ExtResource("12_w3h5g")
-scale_tween = false
 
 [node name="TextureRect" type="TextureRect" parent="MainScreen"]
 layout_mode = 1

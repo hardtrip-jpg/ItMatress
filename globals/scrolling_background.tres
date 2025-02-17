@@ -1,13 +1,42 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://kqtii4xu51uq"]
 
-[ext_resource type="Shader" uid="uid://cdoe3xnh07tq5" path="res://ui/scrolling.gdshader" id="1_kkauk"]
 [ext_resource type="Texture2D" uid="uid://cajm6wr5v23yc" path="res://ui/assets/scrolling.png" id="2_5u3yw"]
 
+[sub_resource type="Shader" id="Shader_824ev"]
+code = "shader_type canvas_item;
+
+uniform float scroll_speed : hint_range(0, 2) = 0.08;
+uniform float angle_degrees : hint_range(0, 360) = 45.0;
+uniform float repeat_x : hint_range(1, 20) = 20;
+uniform float repeat_y : hint_range(1, 20) = 12;
+uniform float row_offset : hint_range(0, 1) = 1;
+uniform sampler2D texture_to_scroll;
+
+void fragment() {
+ float angle_rad = radians(angle_degrees);
+
+ vec2 direction = vec2(cos(angle_rad), sin(angle_rad));
+
+ vec2 offset_uv = UV - (TIME * scroll_speed * direction);
+
+ float offset = fract(floor(offset_uv.y * repeat_y) * 0.5) > 0.0 ? (row_offset * 0.324) : 0.0;
+
+ offset_uv.x += offset;
+
+ vec2 scaled_uv = vec2(fract(offset_uv.x * repeat_x),
+              fract(offset_uv.y * repeat_y));
+
+ vec2 texelSize = vec2(1.0) / vec2(textureSize(texture_to_scroll, 0));
+ vec2 snappedUV = round(scaled_uv / texelSize) * texelSize;
+
+ COLOR = texture(texture_to_scroll, snappedUV);
+}"
+
 [resource]
-shader = ExtResource("1_kkauk")
-shader_parameter/scroll_speed = 0.05
+shader = SubResource("Shader_824ev")
+shader_parameter/scroll_speed = 0.08
 shader_parameter/angle_degrees = 45.0
 shader_parameter/repeat_x = 20.0
-shader_parameter/repeat_y = 15.98
-shader_parameter/row_offset = 0.072
+shader_parameter/repeat_y = 15.0
+shader_parameter/row_offset = 0.38
 shader_parameter/texture_to_scroll = ExtResource("2_5u3yw")
