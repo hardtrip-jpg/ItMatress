@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_6ixxm")
 micro_required = 0
-sec_required = 20
+sec_required = 30
 min_required = 1
 micro_silver = 0
 sec_silver = 0

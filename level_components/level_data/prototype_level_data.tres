@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_j3fmc")
 micro_required = 0
-sec_required = 0
-min_required = 1
+sec_required = 45
+min_required = 0
 micro_silver = 0
 sec_silver = 15
 min_silver = 0
