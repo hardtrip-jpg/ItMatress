@@ -27,13 +27,20 @@ func update(delta : float) -> void:
 	if can_end_cutscene == false:
 		return
 	
+	if Input.is_action_just_pressed("ui_cancel"):
+		transition.emit("MainMenu")
+		label.hide()
+		return
+		
 	if Input.is_anything_pressed():
 		can_end_cutscene = false
 		intro_sequence()
+	
+	
 
 func exit() -> void:
 	animated_sprite.hide()
-	timer.start_timer()
+	cutscene_music.stop()
 
 func intro_sequence() -> void:
 	cutscene_music.stop()

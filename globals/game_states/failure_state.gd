@@ -10,7 +10,7 @@ func enter(_previous_state : State) -> void:
 	fail_screen.show()
 	audio.play(0.3)
 	await get_tree().create_timer(4).timeout
-	SignalManager.load_level.emit("prototype_level")
+	SignalManager.load_level.emit(Global.current_level)
 
 func exit() -> void:
 	fail_screen.hide()

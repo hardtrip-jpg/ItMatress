@@ -20,3 +20,6 @@ func play_game() -> void:
 func quit_game() -> void:
 	get_tree().quit()
 	
+func hide_level_select() -> void:
+	main_screen.show()
+	level_select.hide()

@@ -13,3 +13,5 @@ signal stop_intro
 signal add_to_timer(time_added : float)
 
 signal level_amount_updated
+
+signal dead

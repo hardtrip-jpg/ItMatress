@@ -1,13 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://c62qhu20r8a24"]
+[gd_scene load_steps=15 format=3 uid="uid://c62qhu20r8a24"]
 
 [ext_resource type="Script" uid="uid://di0cvsshwjc64" path="res://players/scripts/player_controller.gd" id="1_4ihkx"]
 [ext_resource type="Script" uid="uid://brx76edt3l1aa" path="res://players/scripts/player_manager.gd" id="1_mkwqq"]
 [ext_resource type="Texture2D" uid="uid://bhrnr2dq2f472" path="res://players/assets/matress_end.png" id="2_ahlmt"]
 [ext_resource type="Texture2D" uid="uid://dapwhjod7nks" path="res://players/assets/player.png" id="2_v7efa"]
 [ext_resource type="Script" uid="uid://dcxxxtpvsa3mw" path="res://players/scripts/player_sprite.gd" id="3_4raac"]
+[ext_resource type="Texture2D" uid="uid://cipccleusb5j" path="res://level_components/assets/vase_shared.png" id="3_cilvr"]
 [ext_resource type="Texture2D" uid="uid://cy6gsvq6qx70l" path="res://players/assets/matress_middle.png" id="3_wm554"]
 [ext_resource type="Script" uid="uid://o2dolboqbrq6" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_vvvkt"]
 [ext_resource type="Script" uid="uid://dv7rrrh5t0nvs" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_mkwqq"]
+
+[sub_resource type="Gradient" id="Gradient_qi300"]
+offsets = PackedFloat32Array(0.713793, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_71twf"]
 radius = 8.0
@@ -24,10 +29,12 @@ duration = 1.0
 transition = 6
 ease = 2
 
-[node name="PlayerManager" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
+[node name="PlayerManager" type="Node2D" node_paths=PackedStringArray("player_1", "player_2", "particles", "sprites")]
 script = ExtResource("1_mkwqq")
 player_1 = NodePath("Player1")
 player_2 = NodePath("Player2")
+particles = [NodePath("Player1/CPUParticles2D"), NodePath("Player2/CPUParticles2D"), NodePath("MatressTop/CPUParticles2D"), NodePath("MatressBottom/CPUParticles2D")]
+sprites = [NodePath("Player1/Sprite2D"), NodePath("Player2/Sprite2D2"), NodePath("MatressTop/Sprite2D2"), NodePath("MatressTop/Sprite2D"), NodePath("MatressBottom/Sprite2D")]
 
 [node name="Player1" type="RigidBody2D" parent="."]
 position = Vector2(0, -48)
@@ -35,6 +42,34 @@ collision_layer = 3
 mass = 8.0
 linear_damp = 1.0
 script = ExtResource("1_4ihkx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Player1"]
+z_index = 2
+texture_filter = 1
+position = Vector2(0.024847, 0.0214386)
+rotation = 3.14159
+emitting = false
+texture = ExtResource("3_cilvr")
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.8
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.12
+local_coords = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 46.88
+angular_velocity_min = -45.0
+angular_velocity_max = 60.0
+damping_max = 5.729
+angle_min = -382.5
+angle_max = 472.5
+scale_amount_min = 0.3
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_qi300")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 shape = SubResource("CircleShape2D_71twf")
@@ -70,6 +105,31 @@ offset = Vector2(2, -2)
 script = ExtResource("3_4raac")
 other_player = NodePath("../../Player1/Sprite2D")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Player2"]
+texture_filter = 1
+emitting = false
+texture = ExtResource("3_cilvr")
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.8
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.12
+local_coords = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 46.88
+angular_velocity_min = -45.0
+angular_velocity_max = 60.0
+damping_max = 5.729
+angle_min = -382.5
+angle_max = 472.5
+scale_amount_min = 0.3
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_qi300")
+
 [node name="MatressTop" type="RigidBody2D" parent="."]
 position = Vector2(0, -20)
 collision_layer = 3
@@ -89,6 +149,31 @@ y_sort_enabled = true
 texture_filter = 3
 texture = ExtResource("2_ahlmt")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="MatressTop"]
+texture_filter = 1
+emitting = false
+texture = ExtResource("3_cilvr")
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.8
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.12
+local_coords = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 46.88
+angular_velocity_min = -45.0
+angular_velocity_max = 60.0
+damping_max = 5.729
+angle_min = -382.5
+angle_max = 472.5
+scale_amount_min = 0.3
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_qi300")
+
 [node name="MatressBottom" type="RigidBody2D" parent="."]
 position = Vector2(0, 14)
 collision_layer = 3
@@ -104,6 +189,31 @@ position = Vector2(0.0166855, 0.0187578)
 rotation = 3.14159
 texture = ExtResource("2_ahlmt")
 offset = Vector2(0.0167007, -5.98124)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="MatressBottom"]
+texture_filter = 1
+emitting = false
+texture = ExtResource("3_cilvr")
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.8
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.12
+local_coords = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 46.88
+angular_velocity_min = -45.0
+angular_velocity_max = 60.0
+damping_max = 5.729
+angle_min = -382.5
+angle_max = 472.5
+scale_amount_min = 0.3
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_qi300")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
 position = Vector2(0, -48)
@@ -141,4 +251,5 @@ follow_mode = 3
 follow_targets = [NodePath("../Player1"), NodePath("../Player2")]
 tween_resource = SubResource("Resource_cilvr")
 follow_damping = true
-metadata/_custom_type_script = ExtResource("6_vvvkt")
+draw_limits = true
+metadata/_custom_type_script = "uid://o2dolboqbrq6"

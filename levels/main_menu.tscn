@@ -339,9 +339,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -96.0
+offset_top = -92.0
 offset_right = 150.0
-offset_bottom = 4.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.84, 0.84)
@@ -357,9 +357,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -160.0
-offset_top = -63.0
+offset_top = -59.0
 offset_right = 160.0
-offset_bottom = 37.0
+offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(164, 28)
@@ -425,19 +425,8 @@ alignment = 1
 layout_mode = 2
 text = "Level 3"
 script = ExtResource("4_7rktv")
+level_name = "prototype_level_three"
 level_id = 3
-
-[node name="Button4" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Level 4"
-script = ExtResource("4_7rktv")
-level_id = 4
-
-[node name="Button5" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Level 5"
-script = ExtResource("4_7rktv")
-level_id = 5
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
 position = Vector2(160, 120)
@@ -445,6 +434,7 @@ script = ExtResource("11_6xkr4")
 snap_to_pixel = true
 tween_resource = SubResource("Resource_s01ir")
 tween_on_load = false
-metadata/_custom_type_script = ExtResource("11_6xkr4")
+draw_limits = true
+metadata/_custom_type_script = "uid://o2dolboqbrq6"
 
 [editable path="SubViewportContainer/SubViewport/Sketchfab_Scene"]

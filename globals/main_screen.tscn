@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://li0wdfx2wyje" path="res://ui/assets/set.png" id="6_fsj25"]
 [ext_resource type="Script" uid="uid://d4ad76tn55erm" path="res://globals/game_states/success_state.gd" id="7_1n5nj"]
 [ext_resource type="Texture2D" uid="uid://tr5l831ebxr4" path="res://ui/assets/go.png" id="7_nb7wt"]
-[ext_resource type="Script" uid="uid://c6r138ykxrr1c" path="res://globals/state.gd" id="7_tla75"]
 [ext_resource type="Script" uid="uid://b6b1fmjmod01l" path="res://globals/game_states/main_menu_state.gd" id="9_8us2b"]
 [ext_resource type="AudioStream" uid="uid://ccxoq786ywsk6" path="res://ui/assets/menutheme.ogg" id="9_8xq3k"]
 [ext_resource type="PackedScene" uid="uid://b6ugu4slromtn" path="res://levels/main_menu.tscn" id="10_71vs2"]
@@ -20,6 +19,7 @@
 [ext_resource type="Script" uid="uid://t04melpyymq" path="res://globals/game_states/failure_state.gd" id="10_i0pim"]
 [ext_resource type="FontFile" uid="uid://dkxh8vke4del8" path="res://ui/assets/Dosmilcatorce.ttf" id="13_df5h0"]
 [ext_resource type="Material" uid="uid://kqtii4xu51uq" path="res://globals/scrolling_background.tres" id="13_fvuq7"]
+[ext_resource type="AudioStream" uid="uid://b5jilbs560awa" path="res://ui/assets/youtube_9bnUWuAO0oU_audio.mp3" id="17_i0pim"]
 [ext_resource type="AudioStream" uid="uid://dhucd6p3vmeax" path="res://ui/assets/456962__funwithsound__failure-drum-sound-effect-1.mp3" id="18_i0pim"]
 [ext_resource type="AudioStream" uid="uid://dg6nyiwqmnwwq" path="res://ui/assets/youtube_f64nXt1z4XU_audio.mp3" id="18_k1c06"]
 [ext_resource type="AudioStream" uid="uid://bljwttum8ajnb" path="res://ui/assets/New 2 2025-02-04 1657.mp3" id="19_kpd6p"]
@@ -155,9 +155,10 @@ animated_sprite = NodePath("../../CanvasLayer/IntroSequence/AnimatedSprite2D")
 animation_player = NodePath("../../CanvasLayer/IntroSequence/AnimationPlayer")
 cutscene_music = NodePath("../../CanvasLayer/IntroSequence/CutsceneMusic")
 
-[node name="Active" type="Node" parent="GameStates" node_paths=PackedStringArray("audio")]
+[node name="Active" type="Node" parent="GameStates" node_paths=PackedStringArray("audio", "timer")]
 script = ExtResource("4_tla75")
 audio = NodePath("../../CanvasLayer/LevelMusic")
+timer = NodePath("../../CanvasLayer/UI/Timer")
 
 [node name="Loading" type="Node" parent="GameStates" node_paths=PackedStringArray("loading_screen", "level_holder")]
 script = ExtResource("6_8us2b")
@@ -169,15 +170,16 @@ script = ExtResource("7_1n5nj")
 timer = NodePath("../../CanvasLayer/UI/Timer")
 success_screen = NodePath("../../CanvasLayer/UI/Success")
 audio = NodePath("../../CanvasLayer/UI/Success/Success")
-metadata/_custom_type_script = ExtResource("7_tla75")
+metadata/_custom_type_script = "uid://c6r138ykxrr1c"
 
 [node name="InGameMenu" type="Node" parent="GameStates"]
 script = ExtResource("5_1n5nj")
 
-[node name="MainMenu" type="Node" parent="GameStates" node_paths=PackedStringArray("main_menu", "menu_music")]
+[node name="MainMenu" type="Node" parent="GameStates" node_paths=PackedStringArray("main_menu", "menu_music", "timer")]
 script = ExtResource("9_8us2b")
 main_menu = NodePath("../../CanvasLayer/MainMenu")
 menu_music = NodePath("MenuMusic")
+timer = NodePath("../../CanvasLayer/UI/Timer")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="GameStates/MainMenu"]
 stream = ExtResource("9_8xq3k")
@@ -319,6 +321,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Success" type="AudioStreamPlayer" parent="CanvasLayer/UI/Success"]
+stream = ExtResource("17_i0pim")
 
 [node name="Fail" type="Control" parent="CanvasLayer/UI"]
 visible = false
@@ -397,7 +400,7 @@ position = Vector2(160, 120)
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("4_1lk24")
-metadata/_custom_type_script = ExtResource("4_1lk24")
+metadata/_custom_type_script = "uid://dny8jqm2ac500"
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
 z_index = -2

@@ -47,6 +47,10 @@ func load_level(level_name : String) -> void:
 	cur_level_path = level_path
 	Global.current_level = level_name
 	
+	if OS.get_name() == "Web":
+		change_scene(load(level_path))
+		transition.emit("IntroSequence")
+		return
 	transition.emit("Loading")
 
 	if(ResourceLoader.has_cached(level_path)):
